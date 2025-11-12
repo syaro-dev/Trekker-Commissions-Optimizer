@@ -1,0 +1,132 @@
+# ========================================
+# .NET / C# Library .gitignore
+# ========================================
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+*.nuspec
+# Optional: keep local NuGet output if you use a dedicated folder
+!nupkgs/
+nupkgs/*
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio settings
+.vs/
+*.VC.db
+*.VC.VC.opendb
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# Build artifacts
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Coverage results
+*.coverage
+*.coveragexml
+
+# Auto-generated files
+Generated\ Files/
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlh
+*.tli
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+*.cachefile
+
+# Others
+*.dbmdl
+*.bak
+*.backup
+*.swp
+*.psess
+*.vsp
+*.vspx
+*.vsmdi
+*.pidb
+*.svclog
+*.scc
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# T4 templates
+*.ttinclude
+*.tt
+
+# Node.js / front-end (if you add web UI later)
+node_modules/
+dist/
+
+# Publish outputs
+publish/
+*.publish.xml
+
+# Azure / Cloud
+*.azurePubxml
+*.pubxml
+*.publishsettings
+*.rdlc
+*.publishproj
+
+# Local environment files
+.env
+.env.*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Package restore files
+.nuget/
+packages/
+*.nuget.props
+*.nuget.targets
+
+# Rider / VSCode specific
+.vscode/
+.idea/
+
+# ========================================
+# END
+# ========================================
