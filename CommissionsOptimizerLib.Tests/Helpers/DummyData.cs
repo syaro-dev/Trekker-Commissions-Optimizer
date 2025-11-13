@@ -5,6 +5,8 @@ namespace CommissionsOptimizerLib.Tests.Helpers;
 
 internal readonly struct DummyData
 {
+    // Only the max level commissions for Trekker Tier up and Disc Tier up are included
+    // will add lower level versions of those later
     public static List<Commission> Commissions =
     [
         new Commission
@@ -250,6 +252,17 @@ internal readonly struct DummyData
     ];
     public const string TEST_COMMISSIONS_FILE_PATH = "test_commissions_data.json";
 
+    // Contains:
+    // Donna :3
+    // New Star Guild (Noya, Iris, Amber)
+    // Cheetos
+    // Shia
+    // Ann
+    // Cosette
+    // Teresa
+    // Minova
+    // Jinglin
+    // Chixia
     public static List<TrekkerData> Trekkers =
     [
         new TrekkerData
@@ -338,4 +351,81 @@ internal readonly struct DummyData
         },
     ];
     public const string TEST_TREKKERS_FILE_PATH = "test_trekkers_data.json";
+
+    // In the meantime assume I have "all" the Trekkers from the list at Lv70
+    public static List<PlayerTrekkerData> PlayerTrekkers =
+    [
+        new PlayerTrekkerData
+        {
+            Trekker = Trekkers[0],
+            Level = 70,
+            Exists = true,
+        },
+        new PlayerTrekkerData
+        {
+            Trekker = Trekkers[1],
+            Level = 70,
+            Exists = true,
+        },
+        new PlayerTrekkerData
+        {
+            Trekker = Trekkers[2],
+            Level = 70,
+            Exists = true,
+        },
+        new PlayerTrekkerData
+        {
+            Trekker = Trekkers[3],
+            Level = 70,
+            Exists = true,
+        },
+        new PlayerTrekkerData
+        {
+            Trekker = Trekkers[4],
+            Level = 70,
+            Exists = true,
+        },
+        new PlayerTrekkerData
+        {
+            Trekker = Trekkers[5],
+            Level = 70,
+            Exists = true,
+        },
+        new PlayerTrekkerData
+        {
+            Trekker = Trekkers[6],
+            Level = 70,
+            Exists = true,
+        },
+        new PlayerTrekkerData
+        {
+            Trekker = Trekkers[7],
+            Level = 70,
+            Exists = true,
+        },
+        new PlayerTrekkerData
+        {
+            Trekker = Trekkers[8],
+            Level = 70,
+            Exists = true,
+        },
+        new PlayerTrekkerData
+        {
+            Trekker = Trekkers[9],
+            Level = 70,
+            Exists = true,
+        },
+        new PlayerTrekkerData
+        {
+            Trekker = Trekkers[10],
+            Level = 70,
+            Exists = true,
+        },
+        new PlayerTrekkerData
+        {
+            Trekker = Trekkers[11],
+            Level = 70,
+            Exists = true,
+        },
+    ];
 }

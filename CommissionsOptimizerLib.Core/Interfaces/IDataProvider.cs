@@ -4,6 +4,6 @@ namespace CommissionsOptimizerLib.Core.Interfaces;
 
 public interface IDataProvider
 {
-    public Task<List<Commission>> GetCommissionsDataAsync(CancellationToken token = default);
-    public Task<List<TrekkerData>> GetTrekkersDataAsync(CancellationToken token = default);
+    public IReadOnlyList<Commission> GetCommissionsData();
+    public IReadOnlyList<TrekkerData> GetTrekkersData();
 }

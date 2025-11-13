@@ -7,7 +7,6 @@ namespace CommissionsOptimizerLib.Tests.Data;
 public class JsonDataSerializerTests
 {
     private readonly static JsonSerializerOptions options = new() { PropertyNameCaseInsensitive = true };
-    private readonly static JsonDataProvider dataProvider = new(DummyData.TEST_COMMISSIONS_FILE_PATH, DummyData.TEST_TREKKERS_FILE_PATH);
 
     [Fact]
     public async Task Should_Write_Commissions_Data()
@@ -15,6 +14,7 @@ public class JsonDataSerializerTests
         // Arrange
         var temp_commissionsData = DummyData.Commissions;
         string temp_filePath = DummyData.TEST_COMMISSIONS_FILE_PATH;
+        string testToJson = JsonSerializer.Serialize(temp_commissionsData, options);
 
         // Act
         await JsonDataSerializer.SaveCommissionsDataAsync(temp_filePath, temp_commissionsData);
@@ -22,7 +22,6 @@ public class JsonDataSerializerTests
         // Test
         Assert.True(File.Exists(temp_filePath));
         string fileContent = File.ReadAllText(temp_filePath);
-        string testToJson = JsonSerializer.Serialize(temp_commissionsData, options);
         Assert.Equal(testToJson, fileContent);
     }
 
@@ -32,6 +31,7 @@ public class JsonDataSerializerTests
         // Arrange
         var temp_trekkersData = DummyData.Trekkers;
         string temp_filePath = DummyData.TEST_TREKKERS_FILE_PATH;
+        string testToJson = JsonSerializer.Serialize(temp_trekkersData, options);
 
         // Act
         await JsonDataSerializer.SaveTrekkersDataAsync(temp_filePath, temp_trekkersData);
@@ -39,31 +39,23 @@ public class JsonDataSerializerTests
         // Test
         Assert.True(File.Exists(temp_filePath));
         string fileContent = File.ReadAllText(temp_filePath);
-        string testToJson = JsonSerializer.Serialize(temp_trekkersData, options);
         Assert.Equal(testToJson, fileContent);
     }
 
     [Fact]
-    public async Task Should_Read_Commissions_Data()
+    public async Task Should_Read_Json_Data()
     {
         // Arrange
+        var dataProvider = await JsonDataProvider.CreateAsync(DummyData.TEST_COMMISSIONS_FILE_PATH, DummyData.TEST_TREKKERS_FILE_PATH, options);
+        var commissions = DummyData.Commissions;
+        var trekkers = DummyData.Trekkers;
 
         // Act
-        var commissions = await dataProvider.GetCommissionsDataAsync();
+        var commissionsResult = dataProvider.GetCommissionsData();
+        var trekkersResult = dataProvider.GetTrekkersData();
 
         // Test
-        Assert.Equal(DummyData.Commissions, commissions, EqualityComparers.Commissions);
-    }
-
-    [Fact]
-    public async Task Should_Read_Trekkers_Data()
-    {
-        // Arrange
-
-        // Act
-        var trekkers = await dataProvider.GetTrekkersDataAsync();
-
-        // Test
-        Assert.Equal(DummyData.Trekkers, trekkers, EqualityComparers.Trekkers);
+        Assert.Equal(commissions, commissionsResult, EqualityComparers.Commissions);
+        Assert.Equal(trekkers, trekkersResult, EqualityComparers.Trekkers);
     }
 }
