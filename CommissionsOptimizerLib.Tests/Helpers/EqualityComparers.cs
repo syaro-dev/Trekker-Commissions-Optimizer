@@ -7,7 +7,9 @@ internal readonly struct EqualityComparers
 {
     public static CommissionsComparer Commissions => new();
     public static TrekkersComparer Trekkers => new();
-    public static RewardsComparer Rewards => new();
+    public static OptimizationResultsComparer OptimizationResults => new();
+    private static RewardsComparer Rewards => new();
+    private static CommissionGroupComparer CommissionGroup => new();
 
     public sealed class CommissionsComparer : IEqualityComparer<Commission>
     {
@@ -15,7 +17,6 @@ internal readonly struct EqualityComparers
         {
             if (ReferenceEquals(x, y)) return true;
             if (x is null || y is null) return false;
-
             return x.ID == y.ID
                 && x.Name == y.Name
                 && Utils.SequenceEqualSafe(x.RequiredRoles, y.RequiredRoles)
@@ -64,6 +65,37 @@ internal readonly struct EqualityComparers
         public int GetHashCode([DisallowNull] Reward obj)
         {
             return HashCode.Combine(obj.RewardType, obj.MinReward, obj.MaxReward);
+        }
+    }
+
+    public sealed class OptimizationResultsComparer : IEqualityComparer<OptimizationResults>
+    {
+        public bool Equals(OptimizationResults? x, OptimizationResults? y)
+        {
+            if (ReferenceEquals(x, y)) return true;
+            if (x == null || y == null) return false;
+            return Utils.SequenceEqualSafe(x.Results, y.Results, EqualityComparers.CommissionGroup);
+        }
+
+        public int GetHashCode([DisallowNull] OptimizationResults obj)
+        {
+            return Utils.GetListHashCode(obj.Results);
+        }
+    }
+
+    public sealed class CommissionGroupComparer : IEqualityComparer<CommissionGroup>
+    {
+        public bool Equals(CommissionGroup? x, CommissionGroup? y)
+        {
+            if (ReferenceEquals(x, y)) return true;
+            if (x == null || y == null) return false;
+            return EqualityComparers.Commissions.Equals(x.Commission, y.Commission)
+                && Utils.SequenceEqualSafe(x.TrekkersToSend, y.TrekkersToSend, EqualityComparers.Trekkers);
+        }
+
+        public int GetHashCode([DisallowNull] CommissionGroup obj)
+        {
+            return HashCode.Combine(obj.Commission, Utils.GetListHashCode(obj.TrekkersToSend));
         }
     }
 }
