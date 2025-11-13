@@ -29,7 +29,7 @@ public sealed class JsonDataProvider : IDataProvider
     private static async Task<List<T>> GetListOfDataAsync<T>(string filePath, JsonSerializerOptions options, CancellationToken token = default)
     {
         if (!File.Exists(filePath))
-            throw new FileNotFoundException("File not found.", filePath);
+            throw new FileNotFoundException($"File not found: {filePath}", filePath);
 
         using var stream = File.OpenRead(filePath);
         var result = await JsonSerializer.DeserializeAsync<List<T>>(stream, options, token);
