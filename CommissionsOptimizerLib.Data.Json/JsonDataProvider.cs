@@ -12,6 +12,18 @@ public sealed class JsonDataProvider : IDataProvider
     public IReadOnlyList<Commission> GetCommissionsData() => commissions;
     public IReadOnlyList<TrekkerData> GetTrekkersData() => trekkers;
 
+    public Commission? GetCommissionDataFromID(string id) =>
+        commissions.FirstOrDefault(x => x.ID == id);
+
+    public Commission? GetCommissionDataFromName(string name) =>
+        commissions.FirstOrDefault(x => x.Name == name);
+
+    public TrekkerData? GetTrekkerDataFromID(string id) =>
+        trekkers.FirstOrDefault(x => x.ID == id);
+
+    public TrekkerData? GetTrekkerDataFromName(string name) =>
+        trekkers.FirstOrDefault(x => x.Name == name);
+
     public static async Task<JsonDataProvider> CreateAsync(string commissionsDataFilePath, string trekkersDataFilePath, JsonSerializerOptions options)
     {
         var commissions = await GetListOfDataAsync<Commission>(commissionsDataFilePath, options);
