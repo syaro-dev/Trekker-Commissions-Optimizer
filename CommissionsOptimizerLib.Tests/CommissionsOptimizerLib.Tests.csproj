@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CommissionsOptimizerLib.Core\CommissionsOptimizerLib.Core.csproj" />
+    <ProjectReference Include="..\CommissionsOptimizerLib.Data.GoogleSheets\CommissionsOptimizerLib.Data.GoogleSheets.csproj" />
     <ProjectReference Include="..\CommissionsOptimizerLib.Data.Json\CommissionsOptimizerLib.Data.Json.csproj" />
   </ItemGroup>
 
