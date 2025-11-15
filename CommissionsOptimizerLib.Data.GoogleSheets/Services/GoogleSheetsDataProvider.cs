@@ -17,6 +17,18 @@ public class GoogleSheetsDataProvider : IDataProvider
 
     public IReadOnlyList<TrekkerData> GetTrekkersData() => trekkers;
 
+    public Commission? GetCommissionDataFromID(string id) =>
+        commissions.FirstOrDefault(x => x.ID == id);
+
+    public Commission? GetCommissionDataFromName(string name) =>
+        commissions.FirstOrDefault(x => x.Name == name);
+
+    public TrekkerData? GetTrekkerDataFromID(string id) =>
+        trekkers.FirstOrDefault(x => x.ID == id);
+
+    public TrekkerData? GetTrekkerDataFromName(string name) =>
+        trekkers.FirstOrDefault(x => x.Name == name);
+
     public static async Task<GoogleSheetsDataProvider> CreateAsync(string commissionsDataUrl, string trekkersDataUrl)
     {
         try
