@@ -73,7 +73,7 @@ public class OptimizerTests
         };
 
         // Act
-        var results = optimizer.CalculateCommissions(playerTrekkerData, selectedMaterials);
+        var results = optimizer.CalculateCommissions(playerTrekkerData, selectedMaterials, 40);
 
         // Test
         Assert.Equal(expected, results, EqualityComparers.OptimizationResults);

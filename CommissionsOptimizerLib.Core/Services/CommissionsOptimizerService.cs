@@ -6,7 +6,7 @@ namespace CommissionsOptimizerLib.Core.Services;
 
 public class CommissionsOptimizerService(IDataProvider DataProvider)
 {
-    public OptimizationResults CalculateCommissions(List<PlayerTrekkerData> playerTrekkers, List<RewardType> selectedMaterials)
+    public OptimizationResults CalculateCommissions(List<PlayerTrekkerData> playerTrekkers, List<RewardType> selectedMaterials, int tyrantLevel)
     {
         var commissions = DataProvider.GetCommissionsData();
         var trekkers = DataProvider.GetTrekkersData();
