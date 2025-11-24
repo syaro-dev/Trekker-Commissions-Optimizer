@@ -1,6 +1,6 @@
 ﻿namespace CommissionsOptimizerLib.Core.Models;
 
-public sealed record OptimizationResults
+public sealed record OptimizationResults(OptimizerOptions Options, IReadOnlyList<Suggestion> Top3Results)
 {
-    public required List<CommissionGroup> Results { get; set; }
+
 }

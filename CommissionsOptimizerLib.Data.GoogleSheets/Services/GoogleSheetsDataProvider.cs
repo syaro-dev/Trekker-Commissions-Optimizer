@@ -29,12 +29,12 @@ public class GoogleSheetsDataProvider : IDataProvider
     public TrekkerData? GetTrekkerDataFromName(string name) =>
         trekkers.FirstOrDefault(x => x.Name == name);
 
-    public static async Task<GoogleSheetsDataProvider> CreateAsync(string commissionsDataUrl, string trekkersDataUrl)
+    public static async Task<GoogleSheetsDataProvider> CreateAsync(string commissionsDataUrl, string trekkersDataUrl, bool displayCsvToConsole = false)
     {
         try
         {
-            var getCommissionsTask = GetListOfDataAsync<GoogleSheetsCommissionsData>(commissionsDataUrl);
-            var getTrekkersTask = GetListOfDataAsync<GoogleSheetsTrekkerData>(trekkersDataUrl);
+            var getCommissionsTask = GetListOfDataAsync<GoogleSheetsCommissionsData>(commissionsDataUrl, displayCsvToConsole);
+            var getTrekkersTask = GetListOfDataAsync<GoogleSheetsTrekkerData>(trekkersDataUrl, displayCsvToConsole);
 
             await Task.WhenAll(getCommissionsTask, getTrekkersTask);
 
@@ -46,10 +46,9 @@ public class GoogleSheetsDataProvider : IDataProvider
 
             return new GoogleSheetsDataProvider(commissions, trekkers);
         }
-        catch (Exception e)
+        catch
         {
-            Console.WriteLine(e.Message);
-            return new GoogleSheetsDataProvider([], []);
+            throw;
         }
     }
 
@@ -59,13 +58,14 @@ public class GoogleSheetsDataProvider : IDataProvider
         this.trekkers = trekkers;
     }
 
-    private static async Task<List<T>> GetListOfDataAsync<T>(string url)
+    private static async Task<List<T>> GetListOfDataAsync<T>(string url, bool displayCsvToConsole)
     {
         using HttpClient client = new();
 
         var csvData = await client.GetStringAsync(url);
 
-        Console.WriteLine(csvData);
+        if (displayCsvToConsole)
+            Console.WriteLine(csvData);
 
         using var reader = new StringReader(csvData);
         using var csvReader = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -143,6 +143,8 @@ public class GoogleSheetsDataProvider : IDataProvider
             TrekkerLevelRequirement = gSheetsData.TrekkerLvlReq,
             Rewards = mainRewards,
             BonusRewards = bonusRewards,
+            VigorEfficiency = gSheetsData.VigorEfficiency,
+            BonusVigorEfficiency = gSheetsData.BonusVigorEfficiency
         };
     }
 

@@ -39,7 +39,7 @@ public class GoogleSheetsDataProviderTests
                 Console.WriteLine($"{commission.Name} ---- Trekker Req Lv {commission.TrekkerLevelRequirement}");
                 Console.WriteLine(string.Join(" | ", commission.RequiredRoles));
                 Console.WriteLine(string.Join(" | ", commission.PersonalityBonus));
-                var mainReward = commission.Rewards.FirstOrDefault(x => x.RewardType != Core.Enums.RewardType.Gifts);
+                var mainReward = commission.GetMainReward();
                 if (mainReward != null)
                 {
                     string rewardAmt = $"{mainReward.MinReward}";

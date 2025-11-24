@@ -20,4 +20,6 @@ internal record GoogleSheetsCommissionsData
     public int? GiftsMinAmt { get; set; }
     public int? GiftsMaxAmt { get; set; }
     public bool Hidden { get; set; }
+    public float VigorEfficiency { get; set; }
+    public float BonusVigorEfficiency { get; set; }
 }

@@ -35,4 +35,34 @@ public sealed class Commission
     /// Bonus rewards you get if you fulfill the personality bonus.
     /// </summary>
     public required List<Reward> BonusRewards { get; set; }
+
+    public float? VigorEfficiency { get; init; }
+    public float? BonusVigorEfficiency { get; init; }
+
+    public Reward? GetMainReward()
+    {
+        return Rewards.FirstOrDefault(x => x.RewardType != RewardType.Gifts && x.RewardType != RewardType.ChessPieces);
+    }
+
+    public Reward? GetBonusMainReward()
+    {
+        return BonusRewards.FirstOrDefault(x => x.RewardType != RewardType.Gifts && x.RewardType != RewardType.ChessPieces);
+    }
+
+    public float GetTotalVigorEfficiency(bool hasBonus)
+        => GetVigorEfficiency() + (hasBonus ? GetBonusVigorEfficiency() : 0);
+
+    private float GetVigorEfficiency()
+        => VigorEfficiency
+        ?? WarnAndReturnZero("[Warn] Vigor Efficiency Calc not implemented");
+
+    private float GetBonusVigorEfficiency()
+        => BonusVigorEfficiency
+        ?? WarnAndReturnZero("[Warn] Vigor Efficiency Calc not implemented");
+
+    private static float WarnAndReturnZero(string message)
+    {
+        Console.WriteLine(message);
+        return 0;
+    }
 }

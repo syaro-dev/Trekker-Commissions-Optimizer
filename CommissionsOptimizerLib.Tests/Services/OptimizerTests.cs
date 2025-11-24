@@ -27,55 +27,13 @@ public class OptimizerTests
         mockDataService.Setup(ds => ds.GetCommissionsData()).Returns(() => DummyData.Commissions);
         var optimizer = new CommissionsOptimizerService(mockDataService.Object);
 
-        var expected = new OptimizationResults()
-        {
-            Results =
-            [
-                new CommissionGroup()
-                {
-                    Commission = DummyData.Commissions[3],
-                    TrekkersToSend =
-                    [
-                        DummyData.Trekkers[0],
-                        DummyData.Trekkers[1],
-                    ]
-                },
-                new CommissionGroup()
-                {
-                    Commission = DummyData.Commissions[5],
-                    TrekkersToSend =
-                    [
-                        DummyData.Trekkers[4],
-                        DummyData.Trekkers[8],
-                        DummyData.Trekkers[5],
-                    ]
-                },
-                new CommissionGroup()
-                {
-                    Commission = DummyData.Commissions[2],
-                    TrekkersToSend =
-                    [
-                        DummyData.Trekkers[2],
-                        DummyData.Trekkers[10],
-                        DummyData.Trekkers[11],
-                    ]
-                },
-                new CommissionGroup()
-                {
-                    Commission = DummyData.Commissions[1],
-                    TrekkersToSend =
-                    [
-                        DummyData.Trekkers[7],
-                        DummyData.Trekkers[9],
-                    ]
-                },
-            ]
-        };
+        var mockOptions = new Mock<OptimizerOptions>();
 
         // Act
-        var results = optimizer.CalculateCommissions(playerTrekkerData, selectedMaterials, 40);
+        var results = optimizer.CalculateCommissions(playerTrekkerData, mockOptions.Object);
 
         // Test
-        Assert.Equal(expected, results, EqualityComparers.OptimizationResults);
+        throw new NotImplementedException("Test not complete yet");
+        //Assert.Equal(expected, results, EqualityComparers.OptimizationResults);
     }
 }

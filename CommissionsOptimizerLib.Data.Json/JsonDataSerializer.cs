@@ -26,9 +26,9 @@ public readonly struct JsonDataSerializer
             using var stream = File.OpenWrite(filePath);
             await JsonSerializer.SerializeAsync(stream, data, _options, token);
         }
-        catch (Exception e)
+        catch
         {
-            Console.WriteLine(e);
+            throw;
         }
     }
 
@@ -44,10 +44,9 @@ public readonly struct JsonDataSerializer
 
             return result ?? [];
         }
-        catch (Exception e)
+        catch
         {
-            Console.WriteLine(e);
-            return [];
+            throw;
         }
     }
 }
